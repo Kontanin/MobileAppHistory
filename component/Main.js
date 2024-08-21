@@ -1,21 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import { StyleSheet, Text, View, Image, Alert } from 'react-native';
 import profileImage from '../profile/mypic.jpg'; // Import the local image
 import node from '../profile/node.png'; // Import the local image
 import reactLogo from '../profile/react.png';
 import IoT from '../profile/IoT.png';
 import crystal from '../profile/crystal.png';
+import CustomButton from './Custom_bottom'; // Import your custom button
 
-export default function Test() {
+export default function Test({ navigation }) {
   const handlePress = () => {
-    Alert.alert('Button Pressed');
+    navigation.navigate('History');
   };
 
   return (
@@ -52,21 +46,26 @@ export default function Test() {
       </View>
       <StatusBar style="auto" />
 
-      {/* Updated Button */}
-      <TouchableOpacity style={styles.customButton} onPress={handlePress}>
-        <Text style={styles.buttonText}>Next</Text>
-      </TouchableOpacity>
+      {/* Use the Custom Button */}
+      <View style={styles.cb}>
+        <CustomButton title="Next" onPress={handlePress} />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  cb: {
+    position: 'absolute',
+    bottom: 0, // Adjust the position if needed
+    right: 20, // Adjust the position
+  },
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 50,
+    paddingTop: 10,
   },
   headerText: {
     paddingTop: 20,
@@ -136,18 +135,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#3C4858',
     textAlign: 'center',
-  },
-  customButton: {
-    position: 'absolute',
-    bottom: 20, // Adjust this value as needed to match the red circle position
-    alignSelf: 'center',
-    backgroundColor: 'black',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
   },
 });
